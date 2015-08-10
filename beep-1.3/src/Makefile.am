@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 bin_PROGRAMS = beep
-setalarm_SOURCES = beep.c
+beep_SOURCES = beep.c
 
 localedir = $(datadir)/locale
 

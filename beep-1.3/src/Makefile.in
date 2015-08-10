@@ -14,7 +14,7 @@
 
 @SET_MAKE@
 
-# Makefile.am for setalarm/src.
+# Makefile.am for beep/src.
 #
 # Copyright 1996, 1997, 2001, 2005, 2006, 2007, 2008 Free Software
 # Foundation, Inc.
@@ -96,7 +96,7 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-bin_PROGRAMS = setalarm$(EXEEXT)
+bin_PROGRAMS = beep$(EXEEXT)
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/build-aux/mkinstalldirs \
@@ -111,10 +111,10 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_setalarm_OBJECTS = ccutil.$(OBJEXT) general.$(OBJEXT) \
-	setalarm.$(OBJEXT) linfunctions.$(OBJEXT)
-setalarm_OBJECTS = $(am_setalarm_OBJECTS)
-setalarm_LDADD = $(LDADD)
+am_beep_OBJECTS = ccutil.$(OBJEXT) general.$(OBJEXT) \
+	beep.$(OBJEXT) linfunctions.$(OBJEXT)
+beep_OBJECTS = $(am_beep_OBJECTS)
+beep_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -143,8 +143,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(setalarm_SOURCES)
-DIST_SOURCES = $(setalarm_SOURCES)
+SOURCES = $(beep_SOURCES)
+DIST_SOURCES = $(beep_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -362,9 +362,9 @@ uninstall-binPROGRAMS:
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 
-setalarm$(EXEEXT): $(setalarm_OBJECTS) $(setalarm_DEPENDENCIES) $(EXTRA_setalarm_DEPENDENCIES) 
-	@rm -f setalarm$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(setalarm_OBJECTS) $(setalarm_LDADD) $(LIBS)
+beep$(EXEEXT): $(beep_OBJECTS) $(beep_DEPENDENCIES) $(EXTRA_beep_DEPENDENCIES) 
+	@rm -f beep$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(beep_OBJECTS) $(beep_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -375,7 +375,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ccutil.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/general.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/linfunctions.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/setalarm.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/beep.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

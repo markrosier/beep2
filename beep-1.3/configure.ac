@@ -19,7 +19,7 @@ AC_PREREQ(2.60)
 
 # Where to generate output; srcdir location.
 AC_CONFIG_HEADERS([config.h:config.in])dnl Keep filename to 8.3 for MS-DOS.
-AC_CONFIG_SRCDIR([src/setalarm.c])
+AC_CONFIG_SRCDIR([src/beep.c])
 
 dnl Checks for programs.
 # We need a C compiler.

@@ -1,112 +1,53 @@
-Intro
------
+This is the README file for the GNU Hello distribution.
+Hello prints a friendly greeting.  It also serves as a sample GNU
+package, showing practices that may be useful for GNU projects.
 
-I just got so tired of being limited to printf("\a"); when I wanted a terminal
-beep.  This program isn't supposed to be anything stupendous, it's just
-supposed to get the job done.  Its intended purpose in life is to live inside
-shell/perl scripts, and allow a little more granularity than you get with the
-default terminal bell.  Maybe I'm the only one who thinks this is useful. :)
+  Copyright (C) 1992, 1993, 1995, 1996, 1997, 1998, 1999, 2000, 2001,
+  2002, 2004, 2005, 2006, 2010 Free Software Foundation, Inc.
 
-If for any reason you decide you need to, contact me:
+  Copying and distribution of this file, with or without modification,
+  are permitted in any medium without royalty provided the copyright
+  notice and this notice are preserved.
 
-johnath@johnath.com
-http://johnath.com/
+See the files ./INSTALL* for building and installation instructions.
 
-And beep can generally be found at:
+Primary distribution point: ftp://ftp.gnu.org/gnu/hello/
+ automatic redirection: http://ftpmirror.gnu.org/hello
+ list of mirrors for manual selection: http://www.gnu.org/prep/ftp.html
 
-http://johnath.com/beep/
+Home page: http://www.gnu.org/software/hello/
 
-For installation instructions, see INSTALL.
-For copying and (non-)warranty information, see COPYING.
-For usage information, check the man page.
+Mailing list: bug-hello@gnu.org
+- please use this list for all discussion: bug reports, enhancements, etc.
+- archived at: http://lists.gnu.org/pipermail/bug-hello
+- anyone is welcome to join the list; to do so, visit
+  http://lists.gnu.org/mailman/listinfo/bug-hello
+- there is no corresponding newsgroup.
 
-There is a github repository of this code at: git://github.com/johnath/beep.git
+Bug reports:
+ Please include enough information for the maintainers to reproduce the
+ problem.  Generally speaking, that means:
+- the contents of any input files necessary to reproduce the bug
+  and command line invocations of the program(s) involved (crucial!).
+- a description of the problem and any samples of the erroneous output.
+- the version number of the program(s) involved (use --version).
+- hardware, operating system, and compiler versions (uname -a).
+- unusual options you gave to configure, if any (see config.status).
+- anything else that you think would be helpful.
 
-A note about ioctl
-------------------
+Patches are most welcome; if possible, please make them with diff -c and
+include ChangeLog entries.
 
-As noted in the man page, some users are running into a situation where beep 
-dies with a complaint from ioctl().  The reason for this, as Peter Tirsek was
-nice enough to point out to me, stems from how the kernel handles beep's 
-attempt to poke at (for non-programmers: ioctl is a sort of catch-all function
-that lets you poke at things that have no other predefined poking-at mechanism)
-the tty, which is how it beeps.  The short story is, the kernel checks that 
-either:
+See README-dev for information on the development environment -- any
+interested parties are welcome.  If you're a programmer and wish to
+contribute, this should get you started.  If you're not a programmer,
+your help in writing test cases, checking the documentation against the
+implementation, translating the program strings to other languages,
+etc., would still be very much appreciated.
 
-- you are the superuser
-- you own the current tty
+The basic Hello algorithm was described by B.W. Kernighan and
+D.M. Ritchie.  The GNU implementation is substantially more complex, in
+order to be a canonical example of a GNU package.  Many people have
+contributed; please see the ./AUTHORS and ./ChangeLog files.
 
-What this means is that root can always make beep work (to the best of my 
-knowledge!), and that any local user can make beep work, BUT a non-root remote
-user cannot use beep in it's natural state.  What's worse, an xterm, or other
-x-session counts, as far as the kernel is concerned, as 'remote', so beep 
-won't work from a non-priviledged xterm either.  I had originally chalked this
-up to a bug, but there's actually nothing I can do about it, and it really is 
-a Good Thing that the kernel does things this way.  There is also a solution.
-
-By default beep is not installed with the suid bit set, because that would 
-just be zany.  On the other hand, if you do make it suid root, all your 
-problems with beep bailing on ioctl calls will magically vanish, which is 
-pleasant, and the only reason not to is that any suid program is a potential 
-security hole.  Conveniently, beep is very short, so auditing it is pretty 
-straightforward.
-
-Decide for yourself, of course, but it looks safe to me - there's only one 
-buffer and fgets doesn't let it overflow, there's only one file opening, and 
-while there is a potential race condition there, it's with /dev/console.  If 
-someone can exploit this race by replacing /dev/console, you've got bigger 
-problems.  :)
-
-So the quick solution is beep is not beeping when you want it to is:
-
-$ su
-Password:
-# chmod 4755 /usr/bin/beep
-
-(or wherever you put it)
-
-The one snag is that this will give any little nitwit the ability to run beep 
-successfully - make sure this is what you want.  If it isn't, a slightly more 
-complex fix would be something like:
-
-# chgrp beep /usr/bin/beep
-# chmod 4750 /usr/bin/beep
-
-and then add only beep-worthy users to the 'beep' group.
-
-Playing Songs
--------------
-
-A surprising number of people have sent in requests, or even patches, to help
-beep play multiple, different sounds off a single invocation.  I had always
-thought that if people wanted a more complex melody, they would just do 
-something like:
-
-$ cat << EOF > song.sh
-#!/bin/sh
-beep <first beep's options>
-beep <second beep's options>
-etc...
-EOF
-
-Nevertheless, because of repeated and vociferous demand, version 1.2 (and 
-presumably all later versions) include the -n/--new switch which allows you to
-use one command line to create multiple beeps.  Check the man page for 
-details.  I have also had a couple people suggest that I encourage the 
-development of such shell scripts/command lines, even collect the particularly
-melodious ones.  Certainly if anyone feels like sending some to me, I will put
-them somewhere visible, or even include them as a sample.  I think Dvorak's New
-World Symphony, 4th Movement, for example, would make a lovely shell script.
-I also wouldn't mind a rendition of BNL's If I had a million dollars.  But by
-all means, be creative.
-
-All files copyright (C) Johnathan Nightingale, 2002.
-All files distributed under the GNU general public license.
-
-
-
-
-
-
-
-
+GNU Hello is free software.  See the file COPYING for copying conditions.
